@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+		<title>Making of a d3 plugin</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Making of a d3 plugin">
+		<meta name="author" content="David Nowinsky <david@toucantoco.com>">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/toucan.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -29,6 +29,7 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js"></script>
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -41,339 +42,318 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
+					<h1>Making of a d3 plugin</h1>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small><a href="http://david.nowinsky.net">David Nowinsky @davinov</a> - <a href="http://toucantoco.com">Toucan Toco</a></small>
 					</p>
+					<section></section>
+					<section data-background="img/toucanbg.png">
+						<h3>Illustrated by <a href="http://toucantoco.com/sparklines">d3 sparklines</a></h3>
+					</section>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
+					<h2>Everything is a module</h2>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+						<blockquote cite="https://bost.ocks.org/mike/d3-plugin/">
+							&ldquo;
+							<small>Although the word plugin suggests extending core functionality, this pattern is used internally by D3 to organize the code into <strong>modules</strong>. Thus, you can use this pattern to replace default behavior or to pick a subset of features for a custom build.</small> Another way of thinking about it is that everything in D3 is a plugin, including core features like colors, scales, and selections.&rdquo;
+						</blockquote>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+						<ul>
+							<li class="fragment">
+								<p>d3.scale</p>
+								<pre><code class="hljs" contenteditable>
+d3.scale.linear()
+.domain([-1, 0, 1])
+.range(["red", "white", "green"]);
+								</code></pre>
+							</li>
+							<li class="fragment"><p>d3.svg.axis</p>
+							<pre><code class="hljs" contenteditable>
+d3.svg.axis()
+.scale(xScale)
+.orient("bottom");
+							</code></pre></li>
+							<li class="fragment">d3.select</li>
+							<li class="fragment">d3.layouts</li>
+						</ul>
 					</section>
+				</section>
+
+				<section>
+					<h2>When to do a module?</h2>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						<blockquote>
+							Oh f**k I need to do that on this too. Already done that three times!
+						</blockquote>
+						<div class="fragment">
+							<h3>Reusability</h3>
+							<h3>Factorisation</h3>
 						</div>
 					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
+					<section>
+						<img src="img/sharing_is_caring_github.png">
+					</section>
+					<section data-background="img/toucanbg.png">
+						<img src="img/leaderboard-sparklines.png">
+					</section>
+					<section data-background="img/toucanbg.png">
+						<img src="img/leaderboard-centered-avg.png">
+					</section>
+					<section data-background="img/toucanbg.png">
+						<img src="img/bulletchart.png">
 					</section>
 				</section>
 
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
 				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
+					<h2>A stupid plugin</h2>
+					<pre class="fragment"><code class="hljs" contenteditable>
+d3.stupid = {};
+					</code></pre>
+					<pre class="fragment"><code class="hljs" contenteditable>
+d3.stupid.sayHello = function() {
+	console.log("hello");
 }
 					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
 				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
+					<h2>Litterature</h2>
+					<section>
+						<img src="img/cat-reading.gif">
+					</section>
+					<section data-background="img/toucanbg.png">
+						<a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">Sparkline theory and practice - Edward Tufte</a>
+					</section>
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
+					<h2>Design</h2>
+					<section>
+						<img src="img/dolphin-painting.gif">
+					</section>
+					<section data-background="img/toucanbg.png">
+						<img src="img/sparklines-mockup.png">
+					</section>
 				</section>
 
 				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
+					<h2>Different types of plugins</h2>
+					<section>
+						<ul>
+							<h4>Computations</h4>
+							<li class="fragment">Scales</li>
+							<li class="fragment">Layouts</li>
+						</ul>
+						<ul>
+							<h4>SVG Components</h4>
+							<li class="fragment">Shapes</li>
+							<li class="fragment">Axis</li>
+						</ul>
+					</section>
+					<section>
+						<h4>In components...</h4>
+						<blockquote cite="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">
+							&ldquo;You’ll find your components much easier to reuse and reason about if you divide them into two categories. I call them <strong>Container</strong> and <strong>Presentational</strong> components <small>but I also heard Fat and Skinny, Smart and Dumb, Stateful and Pure, Screens and Components, etc.These all are not exactly the same, but the core idea is similar.</small>&rdquo;
+						</blockquote>
+						<p>(In React's world)</p>
+					</section>
+					<section>
+						<ul>
+							<h4>Compuationals</h4>
+							<li>Scales</li>
+							<li>Layouts</li>
+						</ul>
+						<ul>
+							<h4>Presentationals</h4>
+							<li class="fragment">Shapes</li>
+							<li class="fragment">Axis</li>
+						</ul>
+						<ul>
+							<h4>Containers</h4>
+							<li class="fragment">?</li>
+							<li class="fragment">See <a href="https://github.com/mbostock/d3/wiki/Plugins">d3 plugins repository</a></li>
+							<li class="fragment">Our charts?</li>
+						</ul>
+					</section>
+					<section>
+						<p>
+							<strong>Container</strong> means it manages a <strong>state</strong>
+						</p>
+					</section>
+					<section data-background="img/toucanbg.png">
+						<h4>Sparklines' component type?</h4>
+						<p data-height="268" data-theme-id="0" data-slug-hash="BKZveR" data-default-tab="result" data-user="davinov" class="codepen">See the Pen <a href="http://codepen.io/davinov/pen/BKZveR/">d3 sparklines</a> by David Nowinsky (<a href="http://codepen.io/davinov">@davinov</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+						<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+						<p class="fragment">
+							Presentation
+						</p>
+						<p class="fragment">
+							<small>
+								with a tiny state ;)
+							</small>
+						</p>
+					</section>
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
+					<h2>I/O s</h2>
+					<section>
+						<p>What do we need (for presentational components)?</p>
+						<h4 class="fragment">A d3 selection</h4>
+					</section>
+					<section data-background="img/toucanbg.png">
+						<img src="img/sparklines-zones-selection.png">
+					</section>
+					<section>
+						<pre><code class="hljs" contenteditable>
+d3.stupid.writeHello = function(d3Selection) {
+	d3Selection
+	.text('Hello!');
+};
+						</code></pre>
+					</section>
+					<section data-background="img/toucanbg.png">
+						<pre><code class="hljs" contenteditable>
+d3.toucan.sparklines = function(d3Selection) {
+	d3Selection
+	.enter()
+	.append('path');
+
+	d3Selection
+	.exit()
+	.remove();
+
+	d3Selection
+	.select('path')
+	.attr('d', function(d) {
+		...
+	});
+};
+						</code></pre>
+					</section>
 				</section>
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+		<section>
+			<h3>Customisability</h3>
+			<section>
+				<h4>Towards reusable charts</h4>
+				<blockquote cite="https://bost.ocks.org/mike/chart/">
+					&ldquo;I’d like to propose a convention for encapsulating reusable charts in D3.&rdquo;
+				</blockquote>
+				<pre><code class="hljs" contenteditable>
+function chart() {
+	// generate chart here
+}
+				</code></pre>
+			</section>
+			<section>
+				From...
+				<pre><code class="hljs" contenteditable>
+d3.stupid.writeHello = function(d3Selection) {
+	d3Selection
+	.text('Hello!');
+};
+				</code></pre>
+				To...
+				<pre><code class="hljs" contenteditable>
+d3.stupid.writeHello = function(options) {
 
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
+	helloWriter = function(d3Selection) {
+		d3Selection
+		.text('Hello!');
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+		// Use options here!
+	};
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
+	return helloWriter;
+};
+				</code></pre>
+			</section>
+			<section>
+				<ul>
+					<li class="fragment">Private options</li>
+					<li class="fragment">Default values</li>
+					<li class="fragment">Reconfiguration</li>
+				</ul>
+				<pre><code class="hljs" contenteditable>
+d3.stupid.writeHello = function(options) {
 
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
+	helloWriter = function(d3Selection) {
+		d3Selection
+		.text('Hello!');
+	};
 
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+	return helloWriter;
+};
+				</code></pre>
+			</section>
+			<section data-background="img/toucanbg.png">
+				<ul style="font-size: 25px">
+					<li><code>dateSelector</code></li>
+					<li><code>valueSelector</code></li>
+					<li><code>width</code></li>
+					<li><code>height</code></li>
+					<li><code>transitionDuration</code></li>
+					<li><code>unit</code></li>
+					<li><code>dateFormat</code>: optional formatting of dates in tooltip</li>
+					<li><code>valueFormat</code>: optional formatting of values in tooltip</li>
+					<li><code>forceLexicalOrder</code>: optional, default true, set to false to force lexical
+					reordering of ordinal dates</li>
+					<li><code>commonScatter</code>: false by default, use the same scatter for all sparklines
+					(y axis)</li>
+					<li><code>selectionTimeout</code>: default 2000, time before tooltip disappears, 0 to disable</li>
+					<li><code>tooltipYOffset</code>: default 0, offset of the tooltip
+				</ul>
+			</section>
+		</section>
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
+		<section>
+			<h3>Composabilty</h3>
+			<section>
+				Breaking into smaller(st) components?
+			</section>
+			<section data-background="img/toucanbg.png">
+				<img src="img/sparklines-zones-smaller-components.png">
+			</section>
+		</section>
 
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
+		<section>
+			<h3>Little big details</h3>
+			<section>
+				<a href="#/6/4">A while ago...</a>
+			</section>
+			<section data-background="img/toucanbg.png">
+				<img src="img/sparklines-zones-blocks-select.png">
+				<p class="fragment"><code>d3.select('.sparkline')</code> VS <code>d3.selectAll('.sparkline')</code></p>
+			</section>
+			<section data-background="img/toucanbg.png">
+				<blockquote class="fragment">
+					It shall be named "sparkline<strong>S</strong>"
+				</blockquote>
+			</section>
+		</section>
 
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
+		<section>
+			<h3>Best pratices</h3>
+			<ul>
+				<li class="fragment">Documentation: <a href="github.com/ToucanToco/sparklines">README</a> and <a href="toucantoco.com/sparklines">website</a></li>
+				<li class="fragment">Examples: CodePen, <a href="https://github.com/ToucanToco/sparklines/blob/master/index.html#L73">random datasets</a></li>
+				<li class="fragment"><a href="https://github.com/ToucanToco/sparklines/blob/master/test/unit/tc-sparklines.spec.coffee">Tests</a></li>
+				<li class="fragment">Publish: <a href="http://bower.io/search/?q=tc-sparklines">Bower</a> and <a href="https://www.npmjs.com/package/tc-sparklines">NPM</a></li>
+				<li class="fragment">Tell the world about it!</li>
+			</ul>
+		</section>
+
+		<section style="text-align: left;">
+			<h1>Have fun extending d3!</h1>
+			<p>
+				<small><a href="http://david.nowinsky.net">@davinov</a> - <a href="http://toucantoco.com">Toucan Toco</a></small> <br>
+				<small><a href="http://toucantoco.com/sparklines">toucantoco.com/sparklines</small> <br>
+			</p>
+		</section>
 
 			</div>
 
